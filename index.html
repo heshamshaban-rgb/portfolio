@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hesham Shaban | Portfolio</title>
+    <style>
+        :root {
+            --bg-main: #090a0f; /* Deep Obsidian Black */
+            --bg-card: rgba(20, 22, 30, 0.75); /* Glassmorphism Smoky Charcoal */
+            --accent: #dfb76c; /* Warm Amber Gold */
+            --text-white: #f4f4f9;
+            --text-muted: #8b8c91;
+            --border-glow: rgba(223, 183, 108, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 24px;
+            background: radial-gradient(circle at center, #13151f 0%, var(--bg-main) 70%);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-bottom: 5px;
+            color: var(--text-white);
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p.subtitle {
+            font-size: 1.25rem;
+            color: var(--accent);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            font-weight: 600;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero .bio {
+            max-width: 750px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        /* Global Tech Stack Badges based on your exact workflow */
+        .tech-stack {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 800px;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .tech-badge {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-white);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--border-glow);
+            transform: translateY(-2px);
+        }
+
+        .cta-btn {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 12px 35px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+
+        .cta-btn:hover {
+            background: var(--accent);
+            color: var(--bg-main);
+            box-shadow: 0 0 25px rgba(223, 183, 108, 0.35);
+        }
+
+        /* Main View (Hub) */
+        #main-view {
+            transition: opacity 0.4s ease;
+        }
+
+        .main-content {
+            padding: 100px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            margin: 15px auto 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.4s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(223, 183, 108, 0.25);
+            box-shadow: 0 20px 40px rgba(223, 183, 108, 0.06);
+        }
+
+        .card-media-wrapper {
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .card-media-wrapper img, .card-media-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .project-card:hover .card-media-wrapper img {
+            transform: scale(1.04);
+        }
+
+        .card-info {
+            padding: 32px;
+        }
+
+        .card-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--text-white);
+        }
+
+        .card-info p.tagline {
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* Project Inner Page (The Concept View) */
+        #project-view {
+            display: none;
+            padding: 60px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 20px;
+        }
+
+        .back-btn {
+            background: transparent;
+            border: 1px solid var(--text-muted);
+            color: var(--text-white);
+            padding: 10px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .project-layout {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 50px;
+        }
+
+        .project-sidebar {
+            position: sticky;
+            top: 40px;
+            height: max-content;
+        }
+
+        .project-sidebar h2 {
+            font-size: 2.2rem;
+            color: var(--text-white);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .concept-box {
+            background: rgba(255,255,255,0.02);
+            border-right: 3px solid var(--accent);
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+
+        .concept-box h4 {
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .concept-box p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .sidebar-meta h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--text-white);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-meta .meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        /* Project Gallery Dynamic Grid */
+        .project-gallery {
+            column-count: 2;
+            column-gap: 20px;
+        }
+
+        .gallery-media-card {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            background: #111217;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.03);
+            transition: border-color 0.3s ease;
+        }
+
+        .gallery-media-card:hover {
+            border-color: rgba(223, 183, 108, 0.3);
+        }
+
+        .gallery-media-card img, .gallery-media-card video {
+            width: 100%;
+            display: block;
+        }
+
+        /* Lightbox Layout Engine */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(4, 5, 8, 0.99);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-content-wrapper {
+            position: relative;
+            max-width: 80vw;
+            max-height: 85vh;
+        }
+
+        .lightbox-content {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: #fff;
+            font-size: 35px;
+            cursor: pointer;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(20, 22, 30, 0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            color: var(--bg-main);
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .prev-btn { left: -70px; }
+        .next-btn { right: -70px; }
+
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-25px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 1000px) {
+            .project-layout { grid-template-columns: 1fr; gap: 30px; }
+            .project-sidebar { position: static; }
+            .project-gallery { column-count: 1; }
+            .prev-btn { left: 10px; top: auto; bottom: -65px; transform: none; }
+            .next-btn { right: 10px; top: auto; bottom: -65px; transform: none; }
+            .lightbox-close { right: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MAIN HUB VIEW -->
+    <div id="main-view">
+        <section class="hero">
+            <h1>HESHAM SHABAN</h1>
+            <p class="subtitle">Interior Design Student & ArchViz Artist</p>
+            <p class="bio">Currently a 2nd-year Interior Design & Décor student. I believe design should be beautifully aesthetic yet deeply functional. I treat every space as a bespoke journey, thoroughly studying each client’s distinct identity to create a unique, tailored experience rather than repeating a fixed pattern.</p>
+            
+            <div class="tech-stack">
+                <span class="tech-badge">3ds Max</span>
+                <span class="tech-badge">Corona Renderer</span>
+                <span class="tech-badge">AutoCAD</span>
+                <span class="tech-badge">SketchUp</span>
+                <span class="tech-badge">Photoshop</span>
+                <span class="tech-badge">CapCut</span>
+                <span class="tech-badge">Luma AI</span>
+                <span class="tech-badge">Google Veo</span>
+                <span class="tech-badge">Nanobanana</span>
+            </div>
+            <button class="cta-btn" onclick="document.getElementById('works').scrollIntoView();">Explore Projects</button>
+        </section>
+
+        <section class="main-content" id="works">
+            <h2 class="section-title">Selected Case Studies</h2>
+            <div class="projects-grid">
+                
+                <!-- Card 1 -->
+                <div class="project-card" onclick="navigateToProject('hyper')">
+                    <div class="card-media-wrapper"><video autoplay loop muted playsinline src="v1.mp4"></video></div>
+                    <div class="card-info">
+                        <p class="tagline">Modern Industrial Style</p>
+                        <h3>HYPER – Luxury Sneaker Store</h3>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="project-card" onclick="navigateToProject('luxoptics')">
+                    <div class="card-media-wrapper"><video autoplay loop muted playsinline src="v2.mp4"></video></div>
+                    <div class="card-info">
+                        <p class="tagline">Modern Luxury Style</p>
+                        <h3>LUXOPTICS – Eyewear & Watches Boutique</h3>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="project-card" onclick="navigateToProject('modern_bed')">
+                    <div class="card-media-wrapper"><img src="m1.jpg" alt="Modern Bedroom"></div>
+                    <div class="card-info">
+                        <p class="tagline">Minimalist Luxury Style</p>
+                        <h3>Modern Luxury Master Bedroom</h3>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="project-card" onclick="navigateToProject('tropical_bed')">
+                    <div class="card-media-wrapper"><video autoplay loop muted playsinline src="v3.mp4"></video></div>
+                    <div class="card-info">
+                        <p class="tagline">Tropical Biophilic Style</p>
+                        <h3>Tropical Boho-Chic Bedroom</h3>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="project-card" onclick="navigateToProject('cave')">
+                    <div class="card-media-wrapper"><img src="c1.jpg" alt="Cave Style Living"></div>
+                    <div class="card-info">
+                        <p class="tagline">Modern Organic Cave Style</p>
+                        <h3>Modern Organic Cave Living</h3>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="project-card" onclick="navigateToProject('tv_units')">
+                    <div class="card-media-wrapper"><img src="t1.jpg" alt="TV Unit"></div>
+                    <div class="card-info">
+                        <p class="tagline">Raw Volcanic Organic Style</p>
+                        <h3>Volcanic TV Unit & Feature Wall</h3>
+                    </div>
+                </div>
+
+                <!-- Card 7 (New Independent Card for r1) -->
+                <div class="project-card" onclick="navigateToProject('warm_stone')">
+                    <div class="card-media-wrapper"><img src="r1.jpg" alt="Warm Stone Reception"></div>
+                    <div class="card-info">
+                        <p class="tagline">Modern Cozy Stone Style</p>
+                        <h3>Warm Stone Wall Reception</h3>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+
+    <!-- DYNAMIC PROJECT INNER VIEW -->
+    <div id="project-view">
+        <div class="project-header">
+            <span style="color: var(--accent); font-weight: 600; letter-spacing: 1px;">PROJECT CASE STUDY</span>
+            <button class="back-btn" onclick="backToHub()">← Back to Projects</button>
+        </div>
+        
+        <div class="project-layout">
+            <!-- Dynamic Sidebar -->
+            <div class="project-sidebar">
+                <h2 id="proj-title">Project Title</h2>
+                <div class="concept-box">
+                    <h4>Design Concept</h4>
+                    <p id="proj-concept">Project concept text goes here...</p>
+                </div>
+                <div class="sidebar-meta">
+                    <h4>Workflow & Tools</h4>
+                    <div class="meta-tags" id="proj-tags"></div>
+                </div>
+            </div>
+
+            <!-- Specific Media Gallery Grid -->
+            <div class="project-gallery" id="proj-gallery"></div>
+        </div>
+    </div>
+
+
+    <!-- Lightbox Layout Engine -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content-wrapper">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <button class="nav-btn prev-btn" onclick="navigateAlbum(-1)">&#10094;</button>
+            <div id="lightbox-target"></div>
+            <button class="nav-btn next-btn" onclick="navigateAlbum(1)">&#10095;</button>
+        </div>
+    </div>
+
+
+    <script>
+        // Exact database utilizing your real workflows and custom philosophies
+        const projectData = {
+            hyper: {
+                title: "HYPER – Luxury Sneaker Store",
+                concept: "An energetic and cutting-edge commercial space tailored for premium sneakers. The core philosophy driving this design is a direct reflection of contemporary youth culture—vibrant, dynamic, and fast-paced. By pairing raw, edgy industrial textures like concrete and exposed framing with sleek, modern materials and high-contrast neon lighting, the environment captures the rapid rhythm of our modern era. The bold 'NO LIMIT' and 'HYPER' elements are intentionally integrated to infuse the space with an inspiring, rebellious energy that instantly resonates with the target audience.",
+                tags: ["Modern Industrial Style", "3ds Max", "SketchUp", "Corona Renderer", "Photoshop", "Nanobanana", "Google Veo", "CapCut"],
+                album: [
+                    {type: 'video', src: 'v1.mp4'}, {type: 'image', src: 'h1.jpg'}, {type: 'image', src: 'h2.jpg'},
+                    {type: 'image', src: 'h3.jpg'}, {type: 'image', src: 'h4.jpg'}, {type: 'image', src: 'h5.jpg'}, {type: 'image', src: 'h6.jpg'}
+                ]
+            },
+            luxoptics: {
+                title: "LUXOPTICS – Eyewear & Watches Boutique",
+                concept: "A premium retail boutique spanning a two-story layout with an integrated mezzanine. This space is explicitly designed for a refined segment of society that prioritizes the 'shopping experience' over the mere physical product. The architectural narrative celebrates geometric symmetry and dramatic, smooth arches. By creating a luxurious material dialogue between rich custom wood cladding and backlit Onyx marble displays, the store transitions from a standard showroom into an elite, immersive sanctuary of timeless elegance.",
+                tags: ["Modern Luxury Style", "AutoCAD", "3ds Max", "SketchUp", "Corona Renderer", "Photoshop", "Nanobanana", "Luma AI", "CapCut"],
+                album: [
+                    {type: 'video', src: 'v2.mp4'}, {type: 'image', src: 'x1.jpg'}, {type: 'image', src: 'x2.jpg'},
+                    {type: 'image', src: 'x3.jpg'}, {type: 'image', src: 'x4.jpg'}, {type: 'image', src: 'x5.jpg'}
+                ]
+            },
+            modern_bed: {
+                title: "Modern Luxury Master Bedroom",
+                concept: "In an era defined by chaotic schedules and the relentless rush of daily life, this master bedroom was envisioned as the ultimate minimalist retreat. The design heavily champions the philosophy of 'beauty through simplicity.' It intentionally strips away intricate or overwhelming ornamentation, replacing it with the calm, clean rhythms of large marble features, warm wood panelling, and soft, recessed linear lighting. It offers a soothing, sophisticated sanctuary where the mind can immediately decompress.",
+                tags: ["Minimalist Luxury Style", "3ds Max", "SketchUp", "Corona Renderer", "Photoshop", "Nanobanana"],
+                album: [
+                    {type: 'image', src: 'm1.jpg'}, {type: 'image', src: 'm2.jpg'}, {type: 'image', src: 'm3.jpg'}, {type: 'image', src: 'm4.jpg'}
+                ]
+            },
+            tropical_bed: {
+                title: "Tropical Boho-Chic Bedroom",
+                concept: "An absolute design celebration aimed at delivering the pure sensation of living entirely inside clean, raw nature. This organic connection is established through authentic material metaphors: real forest-tree timbers shape the bedside tables and front furniture piece, resting upon authentic parquet wooden flooring. The bed setup uses natural, texturally pure fabrics flanked by living, oxygenating indoor vegetation. Finally, the flowing linen curtains beautifully simulate sky clouds, while a custom wall crystal emits ambient patterns representing a brilliant constellation of stars.",
+                tags: ["Tropical Biophilic Style", "3ds Max", "SketchUp", "Corona Renderer", "Photoshop", "Nanobanana", "Luma AI", "CapCut"],
+                album: [
+                    {type: 'video', src: 'v3.mp4'}, {type: 'image', src: 'b1.jpg'}, {type: 'image', src: 'b2.jpg'}, {type: 'image', src: 'b3.jpg'}
+                ]
+            },
+            cave: {
+                title: "Modern Organic Cave Living",
+                concept: "An avant-garde experimental reception designed to completely isolate the user from urban noise and invite quiet contemplation. By breaking away from rigid, traditional right-angled walls, the space adopts fluid, raw stone architectures sculpted to simulate natural caves. The room is intentionally stripped of artificial decorations to highlight the pure, volumetric beauty of raw nature. Featuring a custom ceiling cutout looking directly into a simulated starry night sky, the design stands as a powerful invitation to slow down, breathe, and reconnect with primeval serenity despite the speed of modern life.",
+                tags: ["Modern Organic Cave Style", "3ds Max", "SketchUp", "Corona Renderer", "Photoshop", "Nanobanana"],
+                album: [
+                    {type: 'image', src: 'c1.jpg'}, {type: 'image', src: 'c2.jpg'}
+                ]
+            },
+            tv_units: {
+                title: "Volcanic TV Unit & Feature Wall",
+                concept: "A focused structural exploration that draws inspiration directly from the raw, unyielding power of volcanic formations. This custom entertainment center explores micro-material scale contrasts, pitting rugged, highly tactile split-stone textures directly against the refined, mathematical verticality of premium walnut wood cladding. It demonstrates how heavy, raw elements can be harmoniously tamed within a modern setting to turn a flat wall into a dramatic, high-end volumetric sculpture.",
+                tags: ["Raw Volcanic Organic Style", "3ds Max", "SketchUp", "Corona Renderer", "Photoshop", "Nanobanana"],
+                album: [
+                    {type: 'image', src: 't1.jpg'}
+                ]
+            },
+            warm_stone: {
+                title: "Warm Stone Wall Reception",
+                concept: "A spatial masterclass in balancing textural contrasts. The design aims to bridge the gap between the rough, honest structural presence of a heavy stone feature wall and the delicate, inviting warmth of amber accent lighting. It redefines the concept of cozy modern living by demonstrating that raw, traditionally cold materials can be warm and enveloping when paired with carefully calibrated ambient illumination, ultimately creating an intimate, highly sophisticated residential sanctuary.",
+                tags: ["Modern Cozy Stone Style", "3ds Max", "SketchUp", "Corona Renderer", "Photoshop", "Nanobanana"],
+                album: [
+                    {type: 'image', src: 'r1.jpg'}
+                ]
+            }
+        };
+
+        let currentActiveAlbum = [];
+        let currentActiveIndex = 0;
+
+        function navigateToProject(projectId) {
+            const data = projectData[projectId];
+            currentActiveAlbum = data.album;
+            
+            document.getElementById('proj-title').innerText = data.title;
+            document.getElementById('proj-concept').innerText = data.concept;
+            
+            const tagsContainer = document.getElementById('proj-tags');
+            tagsContainer.innerHTML = '';
+            data.tags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = 'meta-tag';
+                span.innerText = tag;
+                tagsContainer.appendChild(span);
+            });
+
+            const galleryContainer = document.getElementById('proj-gallery');
+            galleryContainer.innerHTML = '';
+            data.album.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'gallery-media-card';
+                card.onclick = () => openLightbox(index);
+
+                if (item.type === 'image') {
+                    const img = document.createElement('img');
+                    img.src = item.src;
+                    img.onerror = function() {
+                        if (!this.dataset.tried && item.src.endsWith('.jpg')) {
+                            this.dataset.tried = true;
+                            this.src = item.src.replace('.jpg', '.jpeg');
+                        }
+                    };
+                    card.appendChild(img);
+                } else if (item.type === 'video') {
+                    const vid = document.createElement('video');
+                    vid.src = item.src;
+                    vid.muted = true;
+                    vid.loop = true;
+                    vid.autoplay = true;
+                    vid.playsInline = true;
+                    card.appendChild(vid);
+                }
+                galleryContainer.appendChild(card);
+            });
+
+            document.getElementById('main-view').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('main-view').style.display = 'none';
+                const pView = document.getElementById('project-view');
+                pView.style.display = 'block';
+                setTimeout(() => { pView.style.opacity = '1'; window.scrollTo(0,0); }, 50);
+            }, 400);
+        }
+
+        function backToHub() {
+            document.getElementById('project-view').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('project-view').style.display = 'none';
+                const mView = document.getElementById('main-view');
+                mView.style.display = 'block';
+                setTimeout(() => { 
+                    mView.style.opacity = '1'; 
+                    // Correct UX Fix: Automatically scrolls perfectly back to the works grid section instead of the top bio
+                    document.getElementById('works').scrollIntoView();
+                }, 50);
+            }, 400);
+        }
+
+        function openLightbox(index) {
+            currentActiveIndex = index;
+            renderLightboxItem();
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function renderLightboxItem() {
+            const target = document.getElementById('lightbox-target');
+            target.innerHTML = '';
+            const item = currentActiveAlbum[currentActiveIndex];
+
+            if (item.type === 'image') {
+                const img = document.createElement('img');
+                img.src = item.src;
+                img.className = 'lightbox-content';
+                img.onerror = function() {
+                    if (!this.dataset.triedJpeg && item.src.endsWith('.jpg')) {
+                        this.dataset.triedJpeg = true;
+                        this.src = item.src.replace('.jpg', '.jpeg');
+                    }
+                };
+                target.appendChild(img);
+            } else if (item.type === 'video') {
+                const vid = document.createElement('video');
+                vid.src = item.src;
+                vid.className = 'lightbox-content';
+                vid.controls = true;
+                vid.autoplay = true;
+                target.appendChild(vid);
+            }
+        }
+
+        function navigateAlbum(direction) {
+            currentActiveIndex += direction;
+            if (currentActiveIndex >= currentActiveAlbum.length) currentActiveIndex = 0;
+            if (currentActiveIndex < 0) currentActiveIndex = currentActiveAlbum.length - 1;
+            renderLightboxItem();
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.getElementById('lightbox-target').innerHTML = '';
+        }
+
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target.id === 'lightbox') closeLightbox();
+        });
+    </script>
+</body>
+</html>
