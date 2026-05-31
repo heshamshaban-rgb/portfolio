@@ -183,7 +183,7 @@
             transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        .project-card:hover .card-media-wrapper img {
+        .project-card:hover .card-media-wrapper img, .project-card:hover .card-media-wrapper video {
             transform: scale(1.04);
         }
 
@@ -294,6 +294,15 @@
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
+        }
+
+        .meta-tag {
+            background: rgba(223, 183, 108, 0.06);
+            border: 1px solid rgba(223, 183, 108, 0.15);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--accent);
         }
 
         /* Project Gallery Dynamic Grid */
@@ -487,7 +496,7 @@
                     </div>
                 </div>
 
-                <!-- Card 7 (New Independent Card for r1) -->
+                <!-- Card 7 -->
                 <div class="project-card" onclick="navigateToProject('warm_stone')">
                     <div class="card-media-wrapper"><img src="r1.jpg" alt="Warm Stone Reception"></div>
                     <div class="card-info">
@@ -540,7 +549,6 @@
 
 
     <script>
-        // Exact database utilizing your real workflows and custom philosophies
         const projectData = {
             hyper: {
                 title: "HYPER – Luxury Sneaker Store",
@@ -667,7 +675,6 @@
                 mView.style.display = 'block';
                 setTimeout(() => { 
                     mView.style.opacity = '1'; 
-                    // Correct UX Fix: Automatically scrolls perfectly back to the works grid section instead of the top bio
                     document.getElementById('works').scrollIntoView();
                 }, 50);
             }, 400);
